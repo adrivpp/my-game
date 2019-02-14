@@ -10,13 +10,14 @@ class Game {
   };
 
   startLoop() {
-    this.player = new Player(this.canvas, 5);
+    this.player = new Player(this.canvas, 5);    
     //console.log('out of loop')
     const loop =() => {
       //console.log('on loop');
       this.updateCanvas();
       this.clearCanvas();
       this.drawCanvas();
+      this.player.checkCollisionJump();
       
       window.requestAnimationFrame(loop);
       
@@ -35,6 +36,8 @@ class Game {
   drawCanvas() {
     this.player.draw();
   }
+
+ 
   
 };
 
