@@ -1,12 +1,12 @@
-Camptain Claw
+CAPTAIN CLAW
 
 Descripción
+
 Es un juego en el que debes esquivar obstaculos e ir recolectando gemas para obtener el amuleto de las nueve vidas
 
 MVP - Tecnología (DOM - CANVAS)
 * Movimiento de arriba a abajo del jugador
-* Añadir obstáculos
-* Añadir enemigos 
+* Añadir obstáculos 
 * Restar vidas al jugador cada vez que colisione con un obstáculo
 main.js
 game.js
@@ -16,9 +16,11 @@ obstacles.js
 Backlog
 * Añadir niveles
 * Añadir bosses despues de cada 3 niveles
+* Añanadir enemigos
+* Añadir la funcion de atacar para el player
 
 States y States Transitions
-Definicion del las transiciones del juego y del main.
+El jugador estará estático en la parte izquierda de la pantalla y el fondo se irá moviendo de derecha a izquierda.
 
 splashScreen
 gameScreen
@@ -27,16 +29,32 @@ winScreen
 funciones de transicion.
 
 Task
-Add Player
-Add moves to the player
-Add Obstacles
-Add enemies
-Check collisions
-Add gems
-Check win
+añadir al jugador: class Player
+upDate()
+Draw()
+
+Darle movimientos:
+setDirection()
+
+Añadir los obstaculos: class Obstacles
+upDate()
+Draw()
+
+Game Screen:
+startLoop()
+updateCanvas()
+clearCanvas()
+drawCanvas()
+checkCollisions()
+
+Añadir las gemas del amuleto: class Gems
+update()
+draw()
+
+Chequear la cantidad de gemas que se han obtenido.
 
 Links
-Trello
+
 Link url
 
 Git
