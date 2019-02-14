@@ -23,12 +23,7 @@ class Player {
   setDirection(direction){
     this.direction = direction;    
   };
-
-  checkCollisionJump() {
-    if (this.y === this.y - 200) {      
-      setDirection(3);
-    }     
-  }
+  
 
 };
 

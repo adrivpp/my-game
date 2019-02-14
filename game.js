@@ -17,7 +17,7 @@ class Game {
       this.updateCanvas();
       this.clearCanvas();
       this.drawCanvas();
-      this.player.checkCollisionJump();
+      
       
       window.requestAnimationFrame(loop);
       

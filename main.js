@@ -42,14 +42,11 @@ const main = () => {                                  //construir el HTML del ma
     const game = new Game(canvas);    
     game.startLoop();   
     const setPlayerDirection = (event) => { //añadiendo movimiento hacia arriba      
-      if (event.code === 'ArrowUp') {
-        console.log(game.player.y)
+      if (event.code === 'ArrowUp') {        
         game.player.setDirection(-3);
                         
-      }    
-      
-    };   
-     
+      }          
+    };        
 
     document.addEventListener('keydown', setPlayerDirection) 
 
