@@ -16,6 +16,13 @@ const main = () => {                                  //construir el HTML del ma
     `);
     const button = document.querySelector('button');
     button.addEventListener('click', buildGame);
+    const section = document.querySelector('section');
+    const width = document.querySelector('.splash').offsetWidth;
+    const height = document.querySelector('.splash').offsetHeight;
+    section.style.backgroundImage = "url('images/claw.png')";
+    section.style.backgroundSize = 'contain';
+    section.style.backgroundRepeat = 'no-repeat';
+    section.style.position = 'absolute';    
   }
   
   const buildGame = () => {                   //construye la pantalla de juego
@@ -24,6 +31,7 @@ const main = () => {                                  //construir el HTML del ma
         <canvas></canvas>                              
       </section>
     `);
+    
     const width = document.querySelector('.game-screen').offsetWidth;
     const height = document.querySelector('.game-screen').offsetHeight;
 
@@ -31,9 +39,18 @@ const main = () => {                                  //construir el HTML del ma
 
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
+    const game = new Game(canvas);
+    game.startLoop();   
+    
+    const setPlayerDirection = (event) => { //añadiendo movimiento hacia arriba      
+      if (event.code === 'ArrowUp') {
+        game.player.setDirection(-1);
+      }
+    };
 
-    setTimeout(buildGameOver,1000)
-        
+    document.addEventListener('keydown', setPlayerDirection) 
+
+    //setTimeout(buildWin,1000) //pueba, borrar depues        
   };
   
   buildSplash();  
@@ -49,10 +66,18 @@ const main = () => {                                  //construir el HTML del ma
     button.addEventListener('click', buildGame);
   };
 
+  const buildWin = ()=> {
+    const buildWinScreen = buildDom(`
+    <section class="you-win">
+        <h1>Has conseguido el amuleto de las nueve vidas</h1>
+        <button class="restart">Restart</button>
+      </section>    
+    `);
+    const button = document.querySelector('button');
+    button.addEventListener('click', buildGame);
+  };
 
-
+  
 };
-
-
 
 window.addEventListener('load', main);
