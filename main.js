@@ -39,19 +39,19 @@ const main = () => {                                  //construir el HTML del ma
 
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
-    const game = new Game(canvas);    
-    game.startLoop();   
-    const setPlayerDirection = (event) => { //añadiendo movimiento hacia arriba      
-      if (event.code === 'ArrowUp') {        
-        game.player.setDirection(-3);
-                        
-      }          
-    };        
+    const game = new Game(canvas);        
+    game.startLoop(); 
+    const setMoves = (event) => {     
 
-    document.addEventListener('keydown', setPlayerDirection) 
-
-    //setTimeout(buildWin,1000) //pueba, borrar depues        
-  };
+      if  (event.code === 'ArrowUp' && game.player.jump === false ) {
+        game.player.speed = -20;
+        game.player.jump = true;
+      }
+    };            
+        
+    document.addEventListener('keydown', setMoves)
+   };           //setTimeout(buildWin,1000) //pueba, borrar depues        
+  
   
   buildSplash();  
 

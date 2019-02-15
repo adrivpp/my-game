@@ -1,29 +1,33 @@
-'use strct'
+'use strict'
 
 class Player {
   constructor(canvas, lives) {
-    this.x = 20;
+    this.size = 50;
+    this.jump = false;
+    this.x = 144;
     this.y = 700;
-    this.lives = lives;
+    this.yv = 1;
     this.ctx = canvas.getContext('2d');
-    this.direction = 0;
-    this.speed = 3;
-    this.size = 150;
-  }  
+    this.lives = lives;
+    this.speed = 0;
+  }
 
-  update() { 
-    this.y = this.y + this.direction*this.speed;
+  upDate() {
+    if( this.jump && this.y < 700) {
+      this.speed += 2;
+    }
+  
+    this.y = this.y + this.yv*this.speed;
+    if (this.y > 700) {
+      this.speed = 0;
+      this.jump = false;
+    }
   }
 
   draw() {
     this.ctx.fillstyle = 'black';
     this.ctx.fillRect(this.x, this.y,this.size,this.size);
   };
-
-  setDirection(direction){
-    this.direction = direction;    
-  };
   
-
 };
 
