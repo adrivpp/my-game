@@ -25,6 +25,7 @@ class Game {
       this.updateCanvas();
       this.clearCanvas();
       this.drawCanvas();
+      this.checkCollisiion();
       
 
       window.requestAnimationFrame(loop);
@@ -51,6 +52,15 @@ class Game {
     this.obstacles.forEach((obstacle) =>{
       obstacle.draw();
     });
+  }
+
+  checkCollisiion() {
+    this.obstacles.forEach((obstacle, index) =>{
+      if (this.player.checkCollisions(obstacle)) {
+        console.log('hola')
+        this.obstacles.splice(index, 1); 
+      } 
+    })
   }
 
 };

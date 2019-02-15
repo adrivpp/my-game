@@ -3,10 +3,9 @@ class Obstacle {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')
     this.y = 730;
-    this.x = this.canvas.width + 20;
+    this.x = this.canvas.width;
     this.speed = -5;
-    this.size = 20;
-    this.distance = 20;       
+    this.size = 20;           
   }
 
   upDate() {
