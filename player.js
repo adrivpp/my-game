@@ -14,20 +14,28 @@ class Player {
 
   upDate() {
     if( this.jump && this.y < 700) {
-      this.speed += 2;
+      this.speed += 1;
     }
+ 
   
     this.y = this.y + this.yv*this.speed;
-    if (this.y > 700) {
+    console.log(this.y)
+    if (this.y >= 681 && this.jump) {
       this.speed = 0;
       this.jump = false;
     }
   }
 
   draw() {
-    this.ctx.fillstyle = 'black';
+    this.ctx.fillStyle = 'black';
     this.ctx.fillRect(this.x, this.y,this.size,this.size);
   };
+
+  checkCollisions(obstacle) {
+    if (this.x + this.size/2 > obstacle.x - obstacle.size/2);
+    console.log('hola') 
+  }
+
   
 };
 

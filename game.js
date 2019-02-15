@@ -6,22 +6,31 @@ class Game {
     this.ctx = this.canvas.getContext('2d');
     this.player; 
     this.controls;
+    this.obstacles = [];
   };
 
   startLoop() {
+   
     this.player = new Player(this.canvas, 5);
     this.controls = new Controller();
     //console.log('out of loop')
-    const loop =() => {
+    const loop =() => {      
+      if (Math.random() < 0.01) {        
+        this.obstacles.push(new Obstacle(this.canvas, this.x));   
+             
+      };
+       
       //console.log('on loop');     
 
       this.updateCanvas();
       this.clearCanvas();
       this.drawCanvas();
+      
 
       window.requestAnimationFrame(loop);
 
       };
+      
     window.requestAnimationFrame(loop);
     };
 
@@ -31,10 +40,17 @@ class Game {
   }
   updateCanvas() {
     this.player.upDate();
-  }
+    this.obstacles.forEach((obstacle) => {
+      obstacle.upDate();
+    })
+    
+  };
 
   drawCanvas() {
     this.player.draw();
+    this.obstacles.forEach((obstacle) =>{
+      obstacle.draw();
+    });
   }
 
 };
