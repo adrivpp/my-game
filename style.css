@@ -54,9 +54,11 @@ section.testimonials .button {
   margin-bottom: 10px;
 }
 
-.game-screen {
-  width: 100%;
-  height: 100vh;
+.game-screen, .game-over {
+  width: 80%;
+  height: 80vh;
+  margin: 0 auto;
+  border: 1px solid black;
 }
 
 .splash {
@@ -75,9 +77,9 @@ section.testimonials .button {
 .splash button {
   width: 20%;
   height: 5%;
-  font-size: 30px;
+  font-size: 20px;
   text-transform: uppercase;
-  background-color:  #AEAFB0;
+  background-color:  white;
   border: none;  
 }
 
@@ -85,4 +87,13 @@ section.testimonials .button {
   background-color: #C57216;
   cursor: pointer;
 }
+
+.game-over {
+  background-image: url("images/likeu.png");
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;  
+}
+
+
 

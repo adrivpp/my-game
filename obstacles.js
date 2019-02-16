@@ -1,11 +1,11 @@
 class Obstacle {
-  constructor(canvas, x) {
+  constructor(canvas) {
+    this.size = 20;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')
-    this.y = 730;
-    this.x = this.canvas.width;
-    this.speed = -5;
-    this.size = 20;           
+    this.y = canvas.height - this.size/2;
+    this.x = canvas.width;
+    this.speed = -8;               
   }
 
   upDate() {
@@ -14,7 +14,7 @@ class Obstacle {
 
   draw() {
   this.ctx.fillStyle = 'red';
-  this.ctx.fillRect(this.x, this.y, this.size, this.size)
+  this.ctx.fillRect(this.x, this.y - this.size/2, this.size, this.size)
   }
 
 }

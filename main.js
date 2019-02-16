@@ -8,7 +8,7 @@ const main = () => {                                  //construir el HTML del ma
   };
 
   const buildSplash = ()=> {                    //start
-    const splashScreen = buildDom(`
+    buildDom(`
       <section class="splash">        
         <button class="start">Start</button>
       </section>
@@ -22,9 +22,9 @@ const main = () => {                                  //construir el HTML del ma
   }
   
   const buildGame = () => {                   //construye la pantalla de juego
-    const buildGameScreen = buildDom(`  
+    buildDom(`  
       <section class="game-screen">    
-        <canvas></canvas>                              
+        <canvas class="canvas"></canvas>                              
       </section>
     `);
     
@@ -35,32 +35,48 @@ const main = () => {                                  //construir el HTML del ma
 
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
-    const game = new Game(canvas);        
+    
+    const game = new Game(canvas);   
+    game.gameOver(buildGameOver);   
+    
     game.startLoop(); 
     
     const setMoves = (event) => {     
 
-      if  (event.code === 'ArrowUp' && game.player.jump === false ) { //salto
+      if  (event.keyCode === 38 && !(game.player.jump)) { //salto
         game.player.speed = -20;
-        game.player.jump = true;
-      }
-    };            
+        game.player.jump = true;                
+        
+      } //else if ((event.keyCode === 0 || event.keyCode === 32)) {        
+         //game.player.shoots = true;
+         //game.controls.space = true;     
+      //}
+    };   
+
+    let enemiesIntervalId = setInterval(()=> {
+      game.enemies.push(new Enemy(canvas));      
+    },10000);  
+    let platformId = setInterval(() => {
+      game.platforms.push(new Platform(canvas))
+    }, 5000);        
         
     document.addEventListener('keydown', setMoves)
-   };                
-  
-  
+   };                  
+
   buildSplash();  
 
   const buildGameOver = () => {             //construye la pantalla del game over
-    const buildGameOverScreen = buildDom(`
+    buildDom(`
       <section class="game-over">
-        <h1>You lose</h1>
+        <h1>Do u hate me?</h1>
         <button class="restart">Restart</button>
+        <button class="Home">Home</button>
       </section>
     `);
-    const button = document.querySelector('button');
-    button.addEventListener('click', buildGame);
+    const restart = document.querySelector('button');
+    restart.addEventListener('click', buildGame);
+    //const home = document.querySelector('.home')
+    //home.addEventListener('click', buildSplash)
   };
 
   const buildWin = ()=> {                 //pantalla de ganar
@@ -78,3 +94,4 @@ const main = () => {                                  //construir el HTML del ma
 };
 
 window.addEventListener('load', main);
+
