@@ -10,20 +10,20 @@ class Game {
     this.enemies = [];
     this.platforms = [];    
     this.isGameOver = false;
+    this.shoots;
   };
 
-  startLoop() { 
-
+  startLoop() {     
     this.player = new Player(this.canvas, 5);
-    this.controls = new Controller();
-    
+    this.controls = new Controller();    
    
     //console.log('out of loop')
     const loop =() => {      
-      if (Math.random() < 0.012) {        
+      if (Math.random() < 0.01) {        
         this.obstacles.push(new Obstacle(this.canvas));                  
-      };              
-       
+      };             
+      
+      
       //console.log('on loop');     
 
       this.updateCanvas();
@@ -42,7 +42,8 @@ class Game {
     this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)    
   }
   updateCanvas() {
-    this.player.upDate();
+    
+    this.player.upDate();       
     this.obstacles.forEach((obstacle) => {
       obstacle.upDate();
     })
@@ -52,11 +53,12 @@ class Game {
     this.platforms.forEach((platform)=> {
       platform.upDate();
     });
-              
+       
   };
 
   drawCanvas() {
-    this.player.draw();
+  
+    this.player.draw();      
     this.obstacles.forEach((obstacle) =>{
       obstacle.draw();
     });
@@ -65,7 +67,7 @@ class Game {
     });    
     this.platforms.forEach((platform) =>{
       platform.draw();
-    });         
+    });             
 
   }
 
@@ -91,13 +93,16 @@ class Game {
         this.enemies.splice(index, 1); 
       } 
     })
-    this.platforms.forEach((obstacle) =>{
-      if (this.player.checkCollisions(obstacle)) {       
+    this.platforms.forEach((platform) =>{
+      if (this.player.checkPlatform(platform)) {       
         console.log('hola')
-        this.player.isCollide = true;                           
+        this.player.isCollide = true;    
+        this.player.jump = false;        
+        //this.platforms.splice(index, 1);                       
       } else {
         this.player.isCollide = false;
       }
+      
     });
   }
 

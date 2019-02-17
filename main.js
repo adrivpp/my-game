@@ -43,15 +43,16 @@ const main = () => {                                  //construir el HTML del ma
     
     const setMoves = (event) => {     
 
-      if  (event.keyCode === 38 && !(game.player.jump)) { //salto
-        game.player.speed = -20;
+      if  (event.keyCode === 38 && !(game.player.jump) || event.keyCode === 38 && game.player.isCollide) { //salto
+        game.player.speed = -25;
         game.player.jump = true;                
         
-      } //else if ((event.keyCode === 0 || event.keyCode === 32)) {        
-         //game.player.shoots = true;
-         //game.controls.space = true;     
-      //}
+      } else if ((event.keyCode === 0 || event.keyCode === 32)) {        
+         game.player.isShoot = true;         
+         game.controls.space = true;     
+      }
     };   
+    
 
     let enemiesIntervalId = setInterval(()=> {
       game.enemies.push(new Enemy(canvas));      

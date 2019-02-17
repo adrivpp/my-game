@@ -7,6 +7,7 @@ class Image {
     this.x = 0;
     this.speed = -1;
     this.img = img
+    
   }
 
   upDate(){

@@ -1,11 +1,20 @@
 class Obstacle {
   constructor(canvas) {
-    this.size = 20;
+    this.sheetWidth = 600; //tamaños de la imagen donde estan los sprites
+    this.sheetHeight = 200;
+    this.columns = 6;  //candidad de columnas que hay en la imagen
+    this.rows = 6; //cantidad de filas
+    this.width = this.sheetWidth/this.columns; //width de cada uno de los elementos en el sprite
+    this.height = this.sheetHeight/this.rows;
+    this.currentFrame = 0.5;
+    this.img = new Image();
+    this.img.src = "images/platform.png";    
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')
-    this.y = canvas.height - this.size/2;
+    this.y = canvas.height - this.height;
     this.x = canvas.width;
-    this.speed = -8;               
+    this.speed = -8;     
+          
   }
 
   upDate() {
@@ -13,8 +22,8 @@ class Obstacle {
   }
 
   draw() {
-  this.ctx.fillStyle = 'red';
-  this.ctx.fillRect(this.x, this.y - this.size/2, this.size, this.size)
+  this.ctx.drawImage(this.img,this.currentFrame*this.width,220,this.width,this.height,this.x,this.y,this.width,this.height)
+  //this.ctx.fillRect(this.x, this.y - this.height/2, this.width, this.height)
   }
 
 }
