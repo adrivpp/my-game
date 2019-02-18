@@ -24,25 +24,9 @@ body {
 
 /* ---- layout ---- */
 
-#site-header {
-  padding: 30px 0;
-  color: white;
-  background: #111;
-}
-
-#site-footer {
-  color: white;
-  padding: 60px 0;
-  background: #111;
-}
-
-#site-main {
-  margin-bottom: 60px;
-}
-
 .container {  
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .section {
@@ -55,9 +39,9 @@ section.testimonials .button {
 }
 
 .game-screen, .game-over {
-  width: 80%;
-  height: 50vh;
-  margin: 0 auto;
+  width: 70%;
+  height: 60vh;
+  margin: 20px auto;
   border: 1px solid black;
 }
 
@@ -91,15 +75,16 @@ section.testimonials .button {
 .game-over {
   background-image: url("images/likeu.png");
   background-position: center;
-  background-size: 60%;
+  background-size: cover;
   background-repeat: no-repeat;  
 }
 
 .game-screen {
   background: white;
-  background-image: url("https://cdn.dribbble.com/users/1016207/screenshots/2818276/artboard_1.png");
+  background-image: url("https://vignette.wikia.nocookie.net/sefyll/images/d/de/TMB_D%26D_Jova.jpg/revision/latest?cb=20180217033620");
   background-size: cover;
-  margin-top: 80px;
+  background-position: center;
+  
 }
 
 

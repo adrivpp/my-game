@@ -48,10 +48,16 @@ const main = () => {                                  //construir el HTML del ma
         game.player.speed = -15;
         game.player.jump = true;               
         
-      } else if ((event.keyCode === 0 || event.keyCode === 32)) {        
+      } else if (event.keyCode === 0 || event.keyCode === 32) {        
          game.shoots.push(new Shoot(canvas, game.player.x + game.player.width - 10, game.player.y + game.player.height/2 - 25))       
          game.player.isShoot = true;          
-      }      
+      } else if (event.keyCode === 39 && event.type === "keydown") {
+          game.player.right = true;
+          game.player.xS = 5;
+      } else if (event.type === 'keyup') {
+          game.player.right = false;          
+      }
+      
     };   
     
 
@@ -62,7 +68,9 @@ const main = () => {                                  //construir el HTML del ma
       game.platforms.push(new Platform(canvas))
     }, 5000);        
         
-    document.addEventListener('keydown', setMoves)    
+    document.addEventListener('keydown', setMoves);  
+    document.addEventListener('keyup', setMoves)
+    
    };                  
 
   buildSplash();  

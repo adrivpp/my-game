@@ -19,20 +19,24 @@ class Player {
     this.cont = 0; 
     this.platformY;
     this.isShoot = false;
+    this.xS = 0;
+    this.friction = -0.5;
+    this.right = false;    
   }
 
-  upDate() {         
+  checkSprites() {
     if (this.jump) {
       this.character = jumpSprite;
     } else if (this.isShoot) {
       this.character = shootSprite;            
     } else {
       this.character = runSprite;
-    };        
+    }; 
     
-    this.srcX = this.currentFrame + this.width;
     this.srcY = 0;
-    
+  }
+
+  checkMovement() {
     if (this.isCollide && !this.jump) {
       this.speed = 0;
       this.y = this.platformY - this.height + 4;
@@ -47,14 +51,26 @@ class Player {
       this.speed = 0;
       this.jump = false;
       this.y = this.canvas.height - this.height;                     
-    }         
-  }   
-  
-
-  draw() {    
-    this.upDate();
-    this.ctx.drawImage(this.character,this.srcX,this.srcY,this.width,this.height,this.x,this.y,this.width,this.height);  
+    } 
     
+    if (this.right) {
+      this.x = this.x + this.xS + this.friction;
+      if (this.x > this.canvas.width) {
+        this.x = 0;
+      }
+    }
+  }
+
+  upDate() {       
+    this.cont++;  
+    this.checkSprites(); 
+    this.checkMovement();         
+  }     
+
+  draw() {        
+    this.upDate();
+    this.srcX = 0;    
+    this.ctx.drawImage(this.character,this.srcX,this.srcY,this.width,this.height,this.x,this.y,this.width,this.height);      
   };
 
   checkCollisions(obstacle) {
@@ -74,7 +90,7 @@ class Player {
   checkPlatform(platform) {
     const rightCollision = this.x + this.width > platform.x;    
     const bottomCollision = this.y + this.height > platform.y;
-    const leftCollision = this.x < platform.x + platform.width;
+    const leftCollision = this.x + this.width/2 < platform.x + platform.width;
     const topCollision = this.y < platform.y;
     
     if (rightCollision && bottomCollision && leftCollision && topCollision) {
@@ -86,12 +102,5 @@ class Player {
 
   loseLives() {
     this.lives--;
-  }
-
-  
-  
+  }    
 };
-
-//const rightCollision = this.x + this.width/2 > platform.x;    
-    //const bottomCollision = this.y + this.height > platform.y - platform.height/2;
-    //const leftCollision = this.x - this.width/2 < platform.x + platform.width;

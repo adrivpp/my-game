@@ -11,11 +11,11 @@ class Game {
     this.isGameOver = false;    
     this.shoots = [];
     this.shootCont = 0;
+    this.movingPlatforms;
   };
 
   startLoop() {     
-    this.player = new Player(this.canvas, 10);           
-
+    this.player = new Player(this.canvas, 10);    
     const loop =() => {      
       if (Math.random() < 0.005) {        
         this.obstacles.push(new Obstacle(this.canvas));                         

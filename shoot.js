@@ -23,7 +23,7 @@ class Shoot {
   }
 
   checkCollision(enemy) {
-    const rightCollision = this.x + this.width/2 > enemy.x;
+    const rightCollision = this.x + this.width/2 > enemy.x + enemy.width/2;
     const leftCollision = this.x - this.width/2 < enemy.x + enemy.width;
     const topCollision = this.y < enemy.y + enemy.height;
     const bottomCollision = this.y + this.height > enemy.y - enemy.height;
