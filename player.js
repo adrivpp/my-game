@@ -7,9 +7,7 @@ class Player {
     this.canvas = canvas;
     this.jump = false;
     this.x = 50 + this.width/2;
-    this.y = canvas.height - this.height;
-    this.yv = 1;
-    this.xv = 1;
+    this.y = canvas.height - this.height;    
     this.ctx = canvas.getContext('2d');
     this.lives = lives;
     this.speed = 0;
@@ -27,7 +25,7 @@ class Player {
     if (this.jump) {
       this.character = jumpSprite;
     } else if (this.isShoot) {
-      this.character = shootSprite;      
+      this.character = shootSprite;            
     } else {
       this.character = runSprite;
     };        
@@ -43,13 +41,13 @@ class Player {
     if(this.jump && this.y < this.canvas.height - this.height/2 || this.y < this.canvas.height - this.height && !this.isCollide ) {      
       this.speed += 0.5;      
     }              
-    this.y = this.y + this.yv*this.speed;    
+    this.y = this.y + this.speed;    
     
     if (this.y >= this.canvas.height - this.height) {
       this.speed = 0;
       this.jump = false;
       this.y = this.canvas.height - this.height;                     
-    }     
+    }         
   }   
   
 
@@ -80,8 +78,7 @@ class Player {
     const topCollision = this.y < platform.y;
     
     if (rightCollision && bottomCollision && leftCollision && topCollision) {
-      this.platformY = platform.y;
-      console.log('colision')
+      this.platformY = platform.y;     
       return true; 
     }    
     return false

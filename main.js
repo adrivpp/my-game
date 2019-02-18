@@ -38,10 +38,10 @@ const main = () => {                                  //construir el HTML del ma
     canvas.setAttribute('height', height);
     
     const game = new Game(canvas);   
-    game.gameOver(buildGameOver);   
+    game.gameOver(buildGameOver); 
+      
     
-    game.startLoop(); 
-    
+    game.startLoop();     
     const setMoves = (event) => {     
 
       if  (event.keyCode === 38 && !(game.player.jump) || event.keyCode === 38 && game.player.isCollide) { //salto
@@ -49,11 +49,9 @@ const main = () => {                                  //construir el HTML del ma
         game.player.jump = true;               
         
       } else if ((event.keyCode === 0 || event.keyCode === 32)) {        
-         game.shoots.push(new Shoot(canvas, game.player.x + game.player.width/2, game.player.y + game.player.height/2))         
-         game.controls.space = true;    
-         game.player.isShoot = true; 
-         console.log('shoot')
-      }
+         game.shoots.push(new Shoot(canvas, game.player.x + game.player.width - 10, game.player.y + game.player.height/2 - 25))       
+         game.player.isShoot = true;          
+      }      
     };   
     
 

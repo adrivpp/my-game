@@ -4,26 +4,22 @@ class Game {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext('2d');
-    this.player; 
-    this.controls;
+    this.player;     
     this.obstacles = [];
     this.enemies = [];
     this.platforms = [];    
     this.isGameOver = false;    
     this.shoots = [];
+    this.shootCont = 0;
   };
 
   startLoop() {     
-    this.player = new Player(this.canvas, 10);
-    this.controls = new Controller();     
-   
-    //console.log('out of loop')
+    this.player = new Player(this.canvas, 10);           
+
     const loop =() => {      
       if (Math.random() < 0.005) {        
-        this.obstacles.push(new Obstacle(this.canvas));                          
-      };                 
-      
-      //console.log('on loop');     
+        this.obstacles.push(new Obstacle(this.canvas));                         
+      };                             
 
       this.updateCanvas();
       this.clearCanvas();
@@ -80,7 +76,7 @@ class Game {
   }
 
   checkCollisiion() {
-    this.obstacles.forEach((obstacle, index) =>{
+    this.obstacles.forEach((obstacle, index) =>{       //obstaculos
       if (this.player.checkCollisions(obstacle)) {
         this.player.loseLives();      
         this.obstacles.splice(index, 1); 
@@ -88,11 +84,12 @@ class Game {
           this.isGameOver = true;
           this.onGameOver();
         }
+      } else if (obstacle.x < 0) {
+          this.obstacles.splice(index, 1);          
       } 
     })
-    this.enemies.forEach((obstacle, index) =>{
-      if (this.player.checkCollisions(obstacle)) {
-        console.log('true')
+    this.enemies.forEach((obstacle, index) =>{          //enemigos
+      if (this.player.checkCollisions(obstacle)) {        
         this.player.loseLives(); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
@@ -101,9 +98,10 @@ class Game {
         this.enemies.splice(index, 1); 
       } else if (obstacle.x < 0){
         this.enemies.splice(index, 1);              
-      }
+      } 
     })
-    let collidingPlatforms = false;
+
+    let collidingPlatforms = false;                //plataformas
     this.platforms.forEach((platform, index) =>{
       if (this.player.checkPlatform(platform)) {       
         if (this.player.speed >= 0) {
@@ -116,22 +114,29 @@ class Game {
         this.player.isCollide = false;
       }      
     });
-    let cont = 0;
-    this.enemies.forEach((enemy, index) => {      
-      this.shoots.forEach((shoot, index) => {       
-        if (shoot.checkCollision(enemy)) {                            
-          cont += 1;    
-          console.log(cont)
-          this.shoots.splice(index,1);
-          if (cont  === 3) {
-            this.enemies.splice(index,1);
-          }           
-        }    
-                      
-      })        
-      
-    })
     
+    this.shoots.forEach((shoot, index) => {         //disparos
+       if (shoot.x > this.player.x + this.player.width + 150)     {
+        this.player.isShoot = false;
+        
+       } 
+       if (shoot.x > this.canvas.width) {
+         this.shoots.splice(index,1);
+       }                                                                                             
+       if (this.enemies.length > 0) {
+         this.enemies.forEach((enemy, index) =>{
+           if (shoot.checkCollision(enemy)) {
+             this.shoots.splice(index, 1);
+             this.shootCont += 1;
+             if (this.shootCont === 5) {
+               this.enemies.splice(index, 1) 
+               this.shootCont = 0;
+             }
+           }
+         })
+       }   
+    })
+  
   }
 
   gameOver(callBack) {
