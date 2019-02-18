@@ -50,7 +50,8 @@ const main = () => {                                  //construir el HTML del ma
         
       } else if ((event.keyCode === 0 || event.keyCode === 32)) {        
          game.shoots.push(new Shoot(canvas, game.player.x + game.player.width/2, game.player.y + game.player.height/2))         
-         game.controls.space = true;     
+         game.controls.space = true;    
+         game.player.isShoot = true; 
          console.log('shoot')
       }
     };   

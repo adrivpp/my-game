@@ -10,6 +10,7 @@ class Shoot {
     this.xS = 8;
     this.width = 10;
     this.height = 10;
+    
   }
 
   upDate() {         
@@ -22,15 +23,14 @@ class Shoot {
   }
 
   checkCollision(enemy) {
-    const rightCollision = this.x + this.width/2 > enemy.x - enemy.width/2;
-    const leftCollision = this.x - this.width/2 < enemy.x + enemy.width/2;
-    const topCollision = this.y < enemy.y + enemy.height/2;
-    const bottomCollision = this.y + this.height > enemy.y - enemy.height/2;
+    const rightCollision = this.x + this.width/2 > enemy.x;
+    const leftCollision = this.x - this.width/2 < enemy.x + enemy.width;
+    const topCollision = this.y < enemy.y + enemy.height;
+    const bottomCollision = this.y + this.height > enemy.y - enemy.height;
     
-    if (rightCollision && leftCollision && topCollision && bottomCollision) {
-      console.log('collision') 
-      return true;   
+    if (rightCollision && leftCollision && topCollision && bottomCollision) {   
       
+      return true;         
     }    
     return false
   };

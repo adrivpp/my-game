@@ -14,7 +14,7 @@ class Game {
   };
 
   startLoop() {     
-    this.player = new Player(this.canvas, 5);
+    this.player = new Player(this.canvas, 10);
     this.controls = new Controller();     
    
     //console.log('out of loop')
@@ -82,7 +82,7 @@ class Game {
   checkCollisiion() {
     this.obstacles.forEach((obstacle, index) =>{
       if (this.player.checkCollisions(obstacle)) {
-        //this.player.loseLives();      
+        this.player.loseLives();      
         this.obstacles.splice(index, 1); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
@@ -93,32 +93,45 @@ class Game {
     this.enemies.forEach((obstacle, index) =>{
       if (this.player.checkCollisions(obstacle)) {
         console.log('true')
-        //this.player.loseLives(); 
+        this.player.loseLives(); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
           this.onGameOver();
         }       
         this.enemies.splice(index, 1); 
-      } 
+      } else if (obstacle.x < 0){
+        this.enemies.splice(index, 1);              
+      }
     })
-    this.platforms.forEach((platform) =>{
+    let collidingPlatforms = false;
+    this.platforms.forEach((platform, index) =>{
       if (this.player.checkPlatform(platform)) {       
         if (this.player.speed >= 0) {
+          collidingPlatforms = true
           this.player.isCollide = true;
           this.player.jump = false;    
-        }   
-        //this.platforms.splice(index, 1);                       
-      } else {
+        } else if (platform.x < 0)
+        this.platforms.splice(index, 1);                               
+      } else if (!collidingPlatforms){
         this.player.isCollide = false;
       }      
     });
-    this.enemies.forEach((enemy) => {
-      this.shoots.forEach((shoot) => {
-        if (shoot.checkCollision(enemy)) {
-        }            
-      })
+    let cont = 0;
+    this.enemies.forEach((enemy, index) => {      
+      this.shoots.forEach((shoot, index) => {       
+        if (shoot.checkCollision(enemy)) {                            
+          cont += 1;    
+          console.log(cont)
+          this.shoots.splice(index,1);
+          if (cont  === 3) {
+            this.enemies.splice(index,1);
+          }           
+        }    
+                      
+      })        
+      
     })
-
+    
   }
 
   gameOver(callBack) {

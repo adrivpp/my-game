@@ -1,13 +1,9 @@
 'use strict'
 
 class Player {
-  constructor(canvas, lives) {
-    this.columns = 18;
-    this.rows = 23;
-    this.sheetWidth =  1200; //tamaños de la imagen donde estan los sprites
-    this.sheetHeight = 2500; 
-    this.width = this.sheetWidth/this.columns;
-    this.height = this.sheetHeight/this.rows;
+  constructor(canvas, lives) {    
+    this.width = 110;
+    this.height = 110;
     this.canvas = canvas;
     this.jump = false;
     this.x = 50 + this.width/2;
@@ -18,18 +14,25 @@ class Player {
     this.lives = lives;
     this.speed = 0;
     this.isCollide = false;        
-    this.character = characterSprite;
+    this.character = runSprite;
     this.srcX;
     this.srcY;
-    this.currentFrame = 0.35;           
+    this.currentFrame = 0;           
     this.cont = 0; 
     this.platformY;
+    this.isShoot = false;
   }
 
-  upDate() {        
-    //this.currentFrame = ++this.currentFrame % this.columns;   //aumenta los frames en los que nos movemos
-    this.cont += 1;  
-    this.srcX = this.currentFrame*this.width;
+  upDate() {         
+    if (this.jump) {
+      this.character = jumpSprite;
+    } else if (this.isShoot) {
+      this.character = shootSprite;      
+    } else {
+      this.character = runSprite;
+    };        
+    
+    this.srcX = this.currentFrame + this.width;
     this.srcY = 0;
     
     if (this.isCollide && !this.jump) {
@@ -53,12 +56,13 @@ class Player {
   draw() {    
     this.upDate();
     this.ctx.drawImage(this.character,this.srcX,this.srcY,this.width,this.height,this.x,this.y,this.width,this.height);  
+    
   };
 
   checkCollisions(obstacle) {
     
-    const rightCollision = this.x + this.width/2 > obstacle.x - obstacle.width/2;
-    const leftCollision = this.x - this.width/2 < obstacle.x + obstacle.width/2;
+    const rightCollision = this.x > obstacle.x - obstacle.width/2;
+    const leftCollision = this.x < obstacle.x + obstacle.width/2;
     const topCollision = this.y < obstacle.y + obstacle.height/2;
     const bottomCollision = this.y + this.height > obstacle.y - obstacle.height/2;
     
@@ -77,6 +81,7 @@ class Player {
     
     if (rightCollision && bottomCollision && leftCollision && topCollision) {
       this.platformY = platform.y;
+      console.log('colision')
       return true; 
     }    
     return false

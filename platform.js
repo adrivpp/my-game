@@ -22,7 +22,7 @@ class Platform {
   }
 
   upDate(){
-    this.x = this.x + this.xSpeed;      
+    this.x = this.x + this.xSpeed;   
   }
 
   draw() {
