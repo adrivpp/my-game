@@ -56,7 +56,7 @@ section.testimonials .button {
 
 .game-screen, .game-over {
   width: 80%;
-  height: 80vh;
+  height: 50vh;
   margin: 0 auto;
   border: 1px solid black;
 }
@@ -97,6 +97,9 @@ section.testimonials .button {
 
 .game-screen {
   background: white;
+  background-image: url("https://cdn.dribbble.com/users/1016207/screenshots/2818276/artboard_1.png");
+  background-size: cover;
+  margin-top: 80px;
 }
 
 

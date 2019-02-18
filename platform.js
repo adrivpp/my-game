@@ -12,7 +12,7 @@ class Platform {
     this.height = this.sheetHeight/this.rows;
     this.currentFrame = 0;
     this.x = canvas.width;    
-    this.y = canvas.height - 120;
+    this.y = canvas.height - 140;
     this.xSpeed = -3;
     this.ySpeed = -3;
     this.img = new Image();

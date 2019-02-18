@@ -24,7 +24,8 @@ const main = () => {                                  //construir el HTML del ma
   const buildGame = () => {                   //construye la pantalla de juego
     buildDom(`  
       <section class="game-screen">    
-        <canvas class="canvas"></canvas>                              
+        <canvas class="canvas"></canvas> 
+                                             
       </section>
     `);
     
@@ -44,12 +45,13 @@ const main = () => {                                  //construir el HTML del ma
     const setMoves = (event) => {     
 
       if  (event.keyCode === 38 && !(game.player.jump) || event.keyCode === 38 && game.player.isCollide) { //salto
-        game.player.speed = -25;
-        game.player.jump = true;                
+        game.player.speed = -15;
+        game.player.jump = true;               
         
       } else if ((event.keyCode === 0 || event.keyCode === 32)) {        
-         game.player.isShoot = true;         
+         game.shoots.push(new Shoot(canvas, game.player.x + game.player.width/2, game.player.y + game.player.height/2))         
          game.controls.space = true;     
+         console.log('shoot')
       }
     };   
     
@@ -61,7 +63,7 @@ const main = () => {                                  //construir el HTML del ma
       game.platforms.push(new Platform(canvas))
     }, 5000);        
         
-    document.addEventListener('keydown', setMoves)
+    document.addEventListener('keydown', setMoves)    
    };                  
 
   buildSplash();  

@@ -7,8 +7,7 @@ class Obstacle {
     this.width = this.sheetWidth/this.columns; //width de cada uno de los elementos en el sprite
     this.height = this.sheetHeight/this.rows;
     this.currentFrame = 0.5;
-    this.img = new Image();
-    this.img.src = "images/platform.png";    
+    this.img = obstacleSprite;       
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')
     this.y = canvas.height - this.height;

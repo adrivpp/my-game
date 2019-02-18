@@ -9,20 +9,19 @@ class Game {
     this.obstacles = [];
     this.enemies = [];
     this.platforms = [];    
-    this.isGameOver = false;
-    this.shoots;
+    this.isGameOver = false;    
+    this.shoots = [];
   };
 
   startLoop() {     
     this.player = new Player(this.canvas, 5);
-    this.controls = new Controller();    
+    this.controls = new Controller();     
    
     //console.log('out of loop')
     const loop =() => {      
-      if (Math.random() < 0.01) {        
-        this.obstacles.push(new Obstacle(this.canvas));                  
-      };             
-      
+      if (Math.random() < 0.005) {        
+        this.obstacles.push(new Obstacle(this.canvas));                          
+      };                 
       
       //console.log('on loop');     
 
@@ -31,11 +30,14 @@ class Game {
       this.drawCanvas();
       this.checkCollisiion();           
       window.requestAnimationFrame(loop);
+      if (this.shoots.isShoot) {
+        this.shoots.push(new Shoot(this.canvas, this.player.x, this.player.y));
+      }
 
-      };
+    };
       
     window.requestAnimationFrame(loop);
-    };
+  };
 
 
   clearCanvas(){
@@ -52,8 +54,11 @@ class Game {
     });    
     this.platforms.forEach((platform)=> {
       platform.upDate();
-    });
-       
+    });    
+    this.shoots.forEach((shoot) => {
+      shoot.upDate();
+    })
+           
   };
 
   drawCanvas() {
@@ -67,14 +72,17 @@ class Game {
     });    
     this.platforms.forEach((platform) =>{
       platform.draw();
-    });             
+    });    
+    this.shoots.forEach((shoot) => {
+      shoot.draw();        
+    });         
 
   }
 
   checkCollisiion() {
     this.obstacles.forEach((obstacle, index) =>{
       if (this.player.checkCollisions(obstacle)) {
-        this.player.loseLives();      
+        //this.player.loseLives();      
         this.obstacles.splice(index, 1); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
@@ -85,7 +93,7 @@ class Game {
     this.enemies.forEach((obstacle, index) =>{
       if (this.player.checkCollisions(obstacle)) {
         console.log('true')
-        this.player.loseLives(); 
+        //this.player.loseLives(); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
           this.onGameOver();
@@ -95,15 +103,22 @@ class Game {
     })
     this.platforms.forEach((platform) =>{
       if (this.player.checkPlatform(platform)) {       
-        console.log('hola')
-        this.player.isCollide = true;    
-        this.player.jump = false;        
+        if (this.player.speed >= 0) {
+          this.player.isCollide = true;
+          this.player.jump = false;    
+        }   
         //this.platforms.splice(index, 1);                       
       } else {
         this.player.isCollide = false;
-      }
-      
+      }      
     });
+    this.enemies.forEach((enemy) => {
+      this.shoots.forEach((shoot) => {
+        if (shoot.checkCollision(enemy)) {
+        }            
+      })
+    })
+
   }
 
   gameOver(callBack) {

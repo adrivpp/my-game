@@ -17,29 +17,35 @@ class Player {
     this.ctx = canvas.getContext('2d');
     this.lives = lives;
     this.speed = 0;
-    this.isCollide = false;    
-    this.character = new Image();
-    this.character.src = "images/clawchar.png"
+    this.isCollide = false;        
+    this.character = characterSprite;
     this.srcX;
     this.srcY;
-    this.currentFrame = 0.35;                 
-    this.isShoot = false;        
+    this.currentFrame = 0.35;           
+    this.cont = 0; 
+    this.platformY;
   }
 
   upDate() {        
     //this.currentFrame = ++this.currentFrame % this.columns;   //aumenta los frames en los que nos movemos
-      
+    this.cont += 1;  
     this.srcX = this.currentFrame*this.width;
-    this.srcY = 0;    
+    this.srcY = 0;
+    
+    if (this.isCollide && !this.jump) {
+      this.speed = 0;
+      this.y = this.platformY - this.height + 4;
+    }
         
     if(this.jump && this.y < this.canvas.height - this.height/2 || this.y < this.canvas.height - this.height && !this.isCollide ) {      
-      this.speed += 1;      
+      this.speed += 0.5;      
     }              
     this.y = this.y + this.yv*this.speed;    
     
-    if (this.y >= this.canvas.height - this.height || this.isCollide && !this.jump) {
+    if (this.y >= this.canvas.height - this.height) {
       this.speed = 0;
-      this.jump = false;                     
+      this.jump = false;
+      this.y = this.canvas.height - this.height;                     
     }     
   }   
   
@@ -57,7 +63,6 @@ class Player {
     const bottomCollision = this.y + this.height > obstacle.y - obstacle.height/2;
     
     if (rightCollision && leftCollision && topCollision && bottomCollision) {
-      console.log('collision') 
       return true;   
       
     }    
@@ -65,12 +70,14 @@ class Player {
   };
 
   checkPlatform(platform) {
-    const rightCollision = this.x + this.width/2 > platform.x;    
-    const bottomCollision = this.y + this.height > platform.y - platform.height;
-    const leftCollision = this.x - this.width/2 < platform.x + platform.width;
+    const rightCollision = this.x + this.width > platform.x;    
+    const bottomCollision = this.y + this.height > platform.y;
+    const leftCollision = this.x < platform.x + platform.width;
+    const topCollision = this.y < platform.y;
     
-    if (rightCollision && bottomCollision && leftCollision) {
-      return true;    
+    if (rightCollision && bottomCollision && leftCollision && topCollision) {
+      this.platformY = platform.y;
+      return true; 
     }    
     return false
   }; 
@@ -83,3 +90,6 @@ class Player {
   
 };
 
+//const rightCollision = this.x + this.width/2 > platform.x;    
+    //const bottomCollision = this.y + this.height > platform.y - platform.height/2;
+    //const leftCollision = this.x - this.width/2 < platform.x + platform.width;

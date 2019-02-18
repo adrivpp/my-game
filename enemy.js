@@ -14,8 +14,8 @@ class Enemy {
     this.y = canvas.height - this.height;
     this.x = this.canvas.width;    
     this.speed = -3;        
-    this.img = new Image();
-    this.img.src = "images/laRoux.png"
+    this.img = enemySprite;
+    
   }
 
   upDate() {
@@ -26,7 +26,7 @@ class Enemy {
   }
 
   draw() {
-    this.upDate();
+    //this.upDate();
     this.ctx.drawImage(this.img,this.srcX,this.srcY,this.width,this.height,this.x,this.y,this.width,this.height);
   }
 }
