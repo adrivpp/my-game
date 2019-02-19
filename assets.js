@@ -7,3 +7,4 @@ const obstacleSprite = new Image(); obstacleSprite.src = "images/platform.png";
 const jumpSprite = new Image(); jumpSprite.src = "images/claw-jump.png";
 const shootSprite = new Image(); shootSprite.src = "images/claw-fire.png";
 const movingPlatformSprite = new Image(); movingPlatformSprite.src = "images/plataforma.png";
+const gemSprite = new Image(); gemSprite.src = "images/gem.png";

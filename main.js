@@ -14,25 +14,24 @@ const main = () => {                                  //construir el HTML del ma
       </section>
     `);
     const button = document.querySelector('button');
-    button.addEventListener('click', buildGame);
-    const section = document.querySelector('section');
-    const width = document.querySelector('.splash').offsetWidth;
-    const height = document.querySelector('.splash').offsetHeight;
+    button.addEventListener('click', buildGame);    
     
   }
   
   const buildGame = () => {                   //construye la pantalla de juego
     buildDom(`  
       <section class="game-screen">    
-        <canvas class="canvas"></canvas> 
-                                             
+        <canvas class="canvas">                
+        </canvas>      
+        <p>Vidas</p>
+        <p>Gemas</p>         
       </section>
     `);
     
     const width = document.querySelector('.game-screen').offsetWidth;
     const height = document.querySelector('.game-screen').offsetHeight;
 
-    const canvas = document.querySelector('canvas');
+    const canvas = document.querySelector('canvas');   
 
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
@@ -40,7 +39,7 @@ const main = () => {                                  //construir el HTML del ma
     const game = new Game(canvas);   
     game.gameOver(buildGameOver); 
     game.winGame(buildWin);
-      
+    
     
     game.startLoop();     
     const setMoves = (event) => {     
@@ -55,9 +54,14 @@ const main = () => {                                  //construir el HTML del ma
       } else if (event.keyCode === 39 && event.type === "keydown") {
           game.player.right = true;
           game.player.xS = 5;
+      } else if (event.keyCode === 37 && event.type === "keydown") {
+          game.player.left = true;
+          game.player.xS = -5;
       } else if (event.type === 'keyup') {
-          game.player.right = false;          
-      }
+          game.player.right = false;       
+          game.player.isShoot = false;  
+          game.player.left = false; 
+      } 
       
     };   
     
@@ -80,14 +84,12 @@ const main = () => {                                  //construir el HTML del ma
   const buildGameOver = () => {             //construye la pantalla del game over
     buildDom(`
       <section class="game-over">        
-      <img src ="https://www.andiar.com/4556-large_default/vinilo-portatil-game-over.jpg"></img>
-        <button class="restart">Restart</button>        
+      <h1>Game Over</h1>
+      <button class="restart">Restart</button>        
       </section>
     `);
     const restart = document.querySelector('button');
-    restart.addEventListener('click', buildGame);
-    //const home = document.querySelector('.home')
-    //home.addEventListener('click', buildSplash)
+    restart.addEventListener('click', buildGame);    
   };
 
   const buildWin = ()=> {                 //pantalla de ganar

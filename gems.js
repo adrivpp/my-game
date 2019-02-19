@@ -9,6 +9,7 @@ class Gems{
     this.height = 30;
     this.y = 30;
     this.ySpeed = 3;
+    this.img = gemSprite;
   }
 
   upDate() {

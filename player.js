@@ -13,7 +13,7 @@ class Player {
     this.speed = 0;
     this.isCollide = false;        
     this.character = runSprite;
-    this.srcX;
+    this.srcX = 0;
     this.srcY;
     this.currentFrame = 0;           
     this.cont = 0; 
@@ -23,14 +23,17 @@ class Player {
     this.friction = -0.5;
     this.right = false;     
     this.gems = [];
+    this.left = false;
     
   }
 
   checkSprites() {
     if (this.jump) {
       this.character = jumpSprite;
+      this.srcX = 0;
     } else if (this.isShoot) {
-      this.character = shootSprite;               
+      this.character = shootSprite;  
+      this.srcX = 110;             
     } else {
       this.character = runSprite;
     }; 
@@ -55,7 +58,7 @@ class Player {
       this.y = this.canvas.height - this.height;                     
     } 
     
-    if (this.right) {
+    if (this.right || this.left) {
       this.x = this.x + this.xS + this.friction;
       if (this.x > this.canvas.width) {
         this.x = 0;
@@ -70,8 +73,16 @@ class Player {
   }     
 
   draw() {        
-    this.upDate();
-    this.srcX = 0;    
+    this.upDate();    
+    if (this.cont > 6 && this.character === runSprite && this.right) {
+      this.currentFrame += this.width;      
+      this.srcX = this.currentFrame;
+      this.cont = 0;
+    } else if (this.currentFrame >= 990) {      
+      this.currentFrame = 0;
+    } 
+        
+
     this.ctx.drawImage(this.character,this.srcX,this.srcY,this.width,this.height,this.x,this.y,this.width,this.height);      
   };
 

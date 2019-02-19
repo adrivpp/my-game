@@ -18,7 +18,7 @@ class Shoot {
   }
 
   draw() {
-    this.ctx.fillStyle = 'red';           
+    this.ctx.fillStyle = 'orange';           
     this.ctx.fillRect(this.x, this.y, this.width, this.height);           
   }
 

@@ -157,10 +157,10 @@ class Game {
     })
     
     this.shoots.forEach((shoot, index) => {         //disparos
-       if (shoot.x > this.player.x + this.player.width + 150)     {
-        this.player.isShoot = false;
+       //if (shoot.x > this.player.x + this.player.width + 150)     {
+        //this.player.isShoot = false;
         
-       } 
+       //} 
        if (shoot.x > this.canvas.width) {
          this.shoots.splice(index,1);
        }                                                                                             
