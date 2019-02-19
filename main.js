@@ -67,6 +67,7 @@ const main = () => {                                  //construir el HTML del ma
     let platformId = setInterval(() => {
       game.platforms.push(new Platform(canvas))
     }, 5000);        
+    
         
     document.addEventListener('keydown', setMoves);  
     document.addEventListener('keyup', setMoves)

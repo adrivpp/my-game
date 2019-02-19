@@ -12,15 +12,34 @@ class Game {
     this.shoots = [];
     this.shootCont = 0;
     this.movingPlatforms;
+    this.gems = [];
+    this.kills = 0;    
+    this.movingPlatforms = [];
   };
 
   startLoop() {     
-    this.player = new Player(this.canvas, 10);    
+    this.movingPlatforms.push(new MovingPlats(this.canvas));
+    this.player = new Player(this.canvas, 7);        
     const loop =() => {      
       if (Math.random() < 0.005) {        
         this.obstacles.push(new Obstacle(this.canvas));                         
       };                             
-
+      if (this.kills === 3 && this.gems.length === 0) {
+        this.gems.push(new Gems(this.canvas)); 
+        
+      } 
+      if (this.kills === 3) {
+        this.obstacles.forEach((obstacle)=>{
+          obstacle.speed -= 1;
+          console.log(obstacle.speed);
+          this.kills = 0;
+        })          
+        //this.enemies.forEach((enemy) =>{
+          //enemy.speed -=1;            
+         // console.log(enemy.speed)
+        //})               
+      }
+      
       this.updateCanvas();
       this.clearCanvas();
       this.drawCanvas();
@@ -54,11 +73,18 @@ class Game {
     this.shoots.forEach((shoot) => {
       shoot.upDate();
     })
+    this.gems.forEach((gem) => {
+      gem.upDate();
+    })   
+    this.movingPlatforms.forEach((platform)=>{
+      platform.upDate();
+    }) 
+    
            
   };
 
   drawCanvas() {
-  
+    
     this.player.draw();      
     this.obstacles.forEach((obstacle) =>{
       obstacle.draw();
@@ -71,7 +97,13 @@ class Game {
     });    
     this.shoots.forEach((shoot) => {
       shoot.draw();        
-    });         
+    });     
+    this.gems.forEach((gem) => {
+      gem.draw();
+    })      
+    this.movingPlatforms.forEach((platform)=>{
+      platform.draw();
+    }) 
 
   }
 
@@ -90,7 +122,7 @@ class Game {
     })
     this.enemies.forEach((obstacle, index) =>{          //enemigos
       if (this.player.checkCollisions(obstacle)) {        
-        this.player.loseLives(); 
+       // this.player.loseLives(); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
           this.onGameOver();
@@ -102,7 +134,7 @@ class Game {
     })
 
     let collidingPlatforms = false;                //plataformas
-    this.platforms.forEach((platform, index) =>{
+    this.platforms.forEach((platform, index ) => {      
       if (this.player.checkPlatform(platform)) {       
         if (this.player.speed >= 0) {
           collidingPlatforms = true
@@ -112,8 +144,22 @@ class Game {
         this.platforms.splice(index, 1);                               
       } else if (!collidingPlatforms){
         this.player.isCollide = false;
-      }      
+      }          
     });
+
+    this.movingPlatforms.forEach((platform) => {
+      if (this.player.checkPlatform(platform)) {
+        if (this.player.speed >= 0) {
+          collidingPlatforms = true
+          this.player.isCollide = true;
+          this.player.jump = false;    
+          this.player.x = platform.x - platform.width/2;
+        } else if (platform.x < 0)
+        this.platforms.splice(index, 1);                               
+      } else if (!collidingPlatforms){
+        this.player.isCollide = false;
+      }
+    })
     
     this.shoots.forEach((shoot, index) => {         //disparos
        if (shoot.x > this.player.x + this.player.width + 150)     {
@@ -129,6 +175,8 @@ class Game {
              this.shoots.splice(index, 1);
              this.shootCont += 1;
              if (this.shootCont === 5) {
+               this.kills++;
+               console.log(this.kills);                  
                this.enemies.splice(index, 1) 
                this.shootCont = 0;
              }
@@ -136,6 +184,17 @@ class Game {
          })
        }   
     })
+
+    this.gems.forEach((gem, index) =>  {            //gemas
+      if (this.player.checkPlatform(gem)) {
+        this.player.gems.push(1);
+        this.gems.splice(index,1);
+        console.log(this.gems)
+      }
+    })
+    //if (this.player.gems.length === 2) {
+      
+    //}
   
   }
 

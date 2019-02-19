@@ -8,17 +8,17 @@ class Platform {
     this.height = 59.44;
     this.currentFrame = 0;
     this.x = canvas.width;    
-    this.y = canvas.height - 140;
-    this.xSpeed = -3;    
-    this.img = platformSprite;      
+    this.y = canvas.height - 200;
+    this.xSpeed = -4;    
+    this.img = platformSprite;   
+
   }
 
   upDate(){
     this.x = this.x + this.xSpeed;   
   }
 
-  draw() {
-    
+  draw() {    
     this.ctx.drawImage(this.img,0,280,this.width,this.height,this.x,this.y,this.width,this.height);
   };
 }

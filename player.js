@@ -21,14 +21,16 @@ class Player {
     this.isShoot = false;
     this.xS = 0;
     this.friction = -0.5;
-    this.right = false;    
+    this.right = false;     
+    this.gems = [];
+    
   }
 
   checkSprites() {
     if (this.jump) {
       this.character = jumpSprite;
     } else if (this.isShoot) {
-      this.character = shootSprite;            
+      this.character = shootSprite;               
     } else {
       this.character = runSprite;
     }; 

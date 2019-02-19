@@ -39,8 +39,8 @@ section.testimonials .button {
 }
 
 .game-screen, .game-over {
-  width: 70%;
-  height: 60vh;
+  width: 80%;
+  height: 80vh;
   margin: 20px auto;
   border: 1px solid black;
 }
