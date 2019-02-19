@@ -2,6 +2,7 @@
 
 html {
   box-sizing: border-box;
+  
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -27,6 +28,7 @@ body {
 .container {  
   width: 100%;
   height: 100%;
+  
 }
 
 .section {
@@ -34,22 +36,24 @@ body {
   padding-top: 20px;
 }
 
-section.testimonials .button {
-  margin-bottom: 10px;
-}
 
-.game-screen, .game-over {
+
+.game-screen {
   width: 80%;
   height: 80vh;
-  margin: 20px auto;
+  margin: 80px auto;
   border: 1px solid black;
+  background: white;
+  background-image: url("https://twistedsifter.files.wordpress.com/2013/05/animated-gifs-of-fighting-game-backgrounds-25.gif?w=800&h=336");
+  background-size: cover;
+  background-position: center;
 }
 
 .splash {
   width: 1000px;
   height: 1000px;
   background-image: url("images/Claw.png");
-  margin: auto;
+  margin: 80px auto;
   background-size: contain;
   background-repeat: no-repeat;
   display: flex;
@@ -58,7 +62,7 @@ section.testimonials .button {
   
 }
 
-.splash button {
+.splash button, .game-over button {
   width: 20%;
   height: 5%;
   font-size: 20px;
@@ -73,19 +77,25 @@ section.testimonials .button {
 }
 
 .game-over {
-  background-image: url("images/likeu.png");
+  width: 100%;
+  height: 100vh;
+  background-image: url("images/gameo.gif");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;  
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 
-.game-screen {
+.game-over button {  
   background: white;
-  background-image: url("https://vignette.wikia.nocookie.net/sefyll/images/d/de/TMB_D%26D_Jova.jpg/revision/latest?cb=20180217033620");
-  background-size: cover;
-  background-position: center;
-  
+  color: black;  
+  width: 20%;
+ 
 }
+
 
 
 

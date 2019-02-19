@@ -79,10 +79,9 @@ const main = () => {                                  //construir el HTML del ma
 
   const buildGameOver = () => {             //construye la pantalla del game over
     buildDom(`
-      <section class="game-over">
-        <h1>Do u hate me?</h1>
-        <button class="restart">Restart</button>
-        <button class="Home">Home</button>
+      <section class="game-over">        
+      <img src ="https://www.andiar.com/4556-large_default/vinilo-portatil-game-over.jpg"></img>
+        <button class="restart">Restart</button>        
       </section>
     `);
     const restart = document.querySelector('button');
