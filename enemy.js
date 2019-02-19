@@ -13,7 +13,7 @@ class Enemy {
     this.ctx = canvas.getContext('2d');
     this.y = canvas.height - this.height;
     this.x = this.canvas.width;    
-    this.speed = -3;        
+    this.speed = -6;        
     this.img = enemySprite;
     
   }

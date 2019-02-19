@@ -39,6 +39,7 @@ const main = () => {                                  //construir el HTML del ma
     
     const game = new Game(canvas);   
     game.gameOver(buildGameOver); 
+    game.winGame(buildWin);
       
     
     game.startLoop();     
@@ -63,11 +64,11 @@ const main = () => {                                  //construir el HTML del ma
 
     let enemiesIntervalId = setInterval(()=> {
       game.enemies.push(new Enemy(canvas));      
-    },10000);  
+    },7000);  
     let platformId = setInterval(() => {
       game.platforms.push(new Platform(canvas))
     }, 5000);        
-    
+
         
     document.addEventListener('keydown', setMoves);  
     document.addEventListener('keyup', setMoves)

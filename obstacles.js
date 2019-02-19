@@ -12,7 +12,7 @@ class Obstacle {
     this.ctx = canvas.getContext('2d')
     this.y = canvas.height - this.height;
     this.x = canvas.width;
-    this.speed = -8;     
+    this.speed = -10;     
           
   }
 

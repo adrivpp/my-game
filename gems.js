@@ -19,7 +19,7 @@ class Gems{
   }
 
   draw() {
-    this.ctx.fillStyle = 'green';
+    this.ctx.fillStyle = 'blue';
     this.ctx.fillRect(this.x,this.y,this.width,this.height);
   }
 }

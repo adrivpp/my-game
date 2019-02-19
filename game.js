@@ -15,30 +15,25 @@ class Game {
     this.gems = [];
     this.kills = 0;    
     this.movingPlatforms = [];
+    this.isWin = false;
   };
 
   startLoop() {     
     this.movingPlatforms.push(new MovingPlats(this.canvas));
     this.player = new Player(this.canvas, 7);        
     const loop =() => {      
-      if (Math.random() < 0.005) {        
+      if (Math.random() < 0.01) {        
         this.obstacles.push(new Obstacle(this.canvas));                         
       };                             
       if (this.kills === 3 && this.gems.length === 0) {
-        this.gems.push(new Gems(this.canvas)); 
-        
-      } 
-      if (this.kills === 3) {
-        this.obstacles.forEach((obstacle)=>{
-          obstacle.speed -= 1;
-          console.log(obstacle.speed);
-          this.kills = 0;
-        })          
+        this.gems.push(new Gems(this.canvas));         
+        this.kills = 0;
+      }       
         //this.enemies.forEach((enemy) =>{
           //enemy.speed -=1;            
          // console.log(enemy.speed)
         //})               
-      }
+      
       
       this.updateCanvas();
       this.clearCanvas();
@@ -54,10 +49,10 @@ class Game {
     window.requestAnimationFrame(loop);
   };
 
-
   clearCanvas(){
     this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)    
   }
+
   updateCanvas() {
     
     this.player.upDate();       
@@ -122,7 +117,7 @@ class Game {
     })
     this.enemies.forEach((obstacle, index) =>{          //enemigos
       if (this.player.checkCollisions(obstacle)) {        
-       // this.player.loseLives(); 
+        this.player.loseLives(); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
           this.onGameOver();
@@ -188,8 +183,11 @@ class Game {
     this.gems.forEach((gem, index) =>  {            //gemas
       if (this.player.checkPlatform(gem)) {
         this.player.gems.push(1);
-        this.gems.splice(index,1);
-        console.log(this.gems)
+        this.gems.splice(index,1);        
+      }
+      if (this.player.gems.length === 5) {
+        this.isWin =  true;
+        this.winGame();
       }
     })
     //if (this.player.gems.length === 2) {
@@ -201,6 +199,10 @@ class Game {
   gameOver(callBack) {
     this.onGameOver = callBack;
   };
+
+  winGame(callBack) {
+    this.winGame = callBack;
+  }
 
 };
 
