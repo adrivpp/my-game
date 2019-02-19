@@ -62,6 +62,8 @@ class Player {
       this.x = this.x + this.xS + this.friction;
       if (this.x > this.canvas.width) {
         this.x = 0;
+      } else if (this.x < 0) {
+        this.x = this.canvas.width;
       }
     }
   }
