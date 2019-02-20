@@ -10,4 +10,3 @@ const shootSprite = new Image(); shootSprite.src = "images/claw-fire.png";
 const movingPlatformSprite = new Image(); movingPlatformSprite.src = "images/plataforma.png";
 const gemSprite = new Image(); gemSprite.src = "images/blue-gem.png";
 const quietSprite = new Image(); quietSprite.src = "images/prota-quieto.png";
-const gemAudio = document.createElement("audio"); gemAudio.src = "Audio/gemas.mp3";

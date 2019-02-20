@@ -24,7 +24,7 @@ class Player {
     this.right = false;     
     this.gems = 0;
     this.left = false;
-    
+    this.sound;
   }
 
   checkSprites() {
@@ -32,6 +32,9 @@ class Player {
       this.character = jumpSprite;
       this.srcX = 0;
     } else if (this.isShoot) {
+        this.sound = new Audio("audio/shoot.mp3");
+        this.sound.play();
+        this.sound.volume = 0.2;
         this.character = shootSprite;  
         this.srcX = 110;             
     } else if (this.left) {
@@ -50,7 +53,7 @@ class Player {
   checkMovement() {
     if (this.isCollide && !this.jump) {
       this.speed = 0;
-      this.y = this.platformY - this.height + 4;
+      this.y = this.platformY - this.height + 5;
     }
         
     if(this.jump && this.y < this.canvas.height - this.height/2 || this.y < this.canvas.height - this.height && !this.isCollide ) {      
@@ -82,7 +85,7 @@ class Player {
 
   draw() {        
     this.upDate();    
-    if (this.cont > 6  && (this.right || this.left) && (this.character === runSprite ||this.character === leftSprite)) {
+    if (this.cont > 6  && (this.right || this.left)) {
       this.currentFrame += this.width;      
       this.srcX = this.currentFrame;
       this.cont = 0;

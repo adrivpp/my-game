@@ -107,6 +107,8 @@ class Game {
   checkCollisiion() {
     this.obstacles.forEach((obstacle, index) =>{       //obstaculos
       if (this.player.checkCollisions(obstacle)) {
+        this.player.sound = new Audio("audio/hit.mp3");
+        this.player.sound.play();
         this.player.loseLives();      
         this.obstacles.splice(index, 1); 
         if (this.player.lives === 0) {
@@ -118,7 +120,9 @@ class Game {
       } 
     })
     this.enemies.forEach((obstacle, index) =>{          //enemigos
-      if (this.player.checkCollisions(obstacle)) {        
+      if (this.player.checkCollisions(obstacle)) { 
+        this.player.sound = new Audio("audio/hit.mp3");
+        this.player.sound.play();       
         this.player.loseLives(); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
@@ -168,6 +172,8 @@ class Game {
              this.shoots.splice(index, 1);
              this.shootCont += 1;
              if (this.shootCont === 5) {
+               this.player.sound = new Audio("audio/takethat.mp3")
+               this.player.sound.play();
                this.kills++;                         
                this.enemies.splice(index, 1) 
                this.shootCont = 0;
@@ -178,7 +184,9 @@ class Game {
     })
 
     this.gems.forEach((gem, index) =>  {       //gemas                
-      if (this.player.checkPlatform(gem)) {        
+      if (this.player.checkPlatform(gem)) {    
+        this.player.sound = new Audio("audio/gemas.mp3");
+        this.player.sound.play();
         this.player.gems++;
         this.gems.splice(index,1);    
         this.player.lives++;
