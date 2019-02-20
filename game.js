@@ -19,6 +19,7 @@ class Game {
   };
 
   startLoop() {         
+    
     this.movingPlatforms.push(new MovingPlats(this.canvas));
     this.player = new Player(this.canvas, 7);        
     const loop =() => {      
@@ -176,22 +177,19 @@ class Game {
        }   
     })
 
-    this.gems.forEach((gem, index) =>  {            //gemas
-      if (this.player.checkPlatform(gem)) {
+    this.gems.forEach((gem, index) =>  {       //gemas                
+      if (this.player.checkPlatform(gem)) {        
         this.player.gems++;
         this.gems.splice(index,1);    
         this.player.lives++;
         console.log(this.player.lives)    
       }
-      if (this.player.gems === 1) {
+      if (this.player.gems === 2) {
         this.isWin =  true;
         this.winGame();
       }
     })
-    //if (this.player.gems.length === 2) {
-      
-    //}
-  
+    
   }
 
   gameOver(callBack) {

@@ -103,7 +103,10 @@ const main = () => {                                  //construir el HTML del ma
     buildDom(`
       <section class="game-over">        
       <h1>Game Over</h1>
-      <button class="restart">Restart</button>        
+      <button class="restart">Restart</button>  
+      <audio controls autoplay>
+          <source src= "./Audio/gameover.mp3">
+        <audio>      
       </section>
     `);
     const restart = document.querySelector('button');
@@ -113,9 +116,10 @@ const main = () => {                                  //construir el HTML del ma
   const buildWin = ()=> {                 //pantalla de ganar
     const buildWinScreen = buildDom(`
     <section class="you-win">        
+        <img src="images/win (1).png">
         <button class="restart">Restart</button>
-        <audio controls autoplay loop>
-          <source src= "./Audio/Captain Claw - The Ceremony.mp3" type="audio/mpeg">
+        <audio controls autoplay>
+          <source src= "./Audio/Captain Claw - The Ceremony (mp3cut.net).mp3">
         <audio>
       </section>    
     `);

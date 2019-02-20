@@ -76,7 +76,7 @@ body {
   margin-bottom: 20px;
 }
 
-.splash button:hover, .game-over button:hover{
+.game-over button:hover, .you-win button:hover{
   background-color: #007EE3;
   color: white;
   cursor: pointer;
@@ -145,10 +145,12 @@ body {
   background-image: url("images/win.jpg");
   background-position: center;
   background-repeat: no-repeat;  
-  background-image: linear-gradient(to left top, #12202d, #203a4f, #2c5774, #37759b, #4195c4);
+  background-image: url("https://lh3.googleusercontent.com/-U_jcps5ANtQ/V5LXaDlzjqI/AAAAAAABDWk/Fd3KAAvwS4M/s0/illust_4918.jpg");
+  background-size: cover;  
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -157,6 +159,140 @@ body {
   display: none;
 }
 
-.you-win button:hover {
+.you-win img {
+  width: 200px;
+  height: 200px;
+  animation: bounce-in-top 2s both;
+}
+
+.splash button {  
+    animation: shaker 1.5s infinite;   
+    background: #007EE3; 
+    color: white;
+}
+
+.splash button:hover {
+  background: white;
+  color: black;
   cursor: pointer;
+}
+
+@keyframes bounce-in-top {
+  0% {
+    transform: translateY(-500px);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(-65px);
+    animation-timing-function: ease-in;
+  }
+  72% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  81% {
+    transform: translateY(-28px);
+    animation-timing-function: ease-in;
+  }
+  90% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  95% {
+    transform: translateY(-8px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+}
+
+
+
+@keyframes shaker {
+  0% {
+    transform:rotate(0deg);
+  }
+
+  29% {
+    transform:rotate(0deg);
+  }
+
+
+  30% {
+    transform:rotate(1deg);
+  }
+
+  31% {
+    transform:rotate(2deg);
+  }
+
+  33% {
+    transform:rotate(1deg);
+  }
+
+  35% {
+    transform:rotate(0deg);
+  }
+
+  37% {
+    transform:rotate(-1deg);
+  }
+
+  39% {
+    transform:rotate(-2deg);
+  }
+
+  41% {
+    transform:rotate(-1deg);
+  }
+
+  43% {
+    transform:rotate(0deg);
+  }
+
+
+  45% {
+    transform:rotate(1deg);
+  }
+
+  47% {
+    transform:rotate(2deg);
+  }
+
+  49% {
+    transform:rotate(1deg);
+  }
+
+  51% {
+    transform:rotate(0deg);
+  }
+
+  53% {
+    transform:rotate(-1deg);
+  }
+
+  55% {
+    transform:rotate(-2deg);
+  }
+
+  57% {
+    transform:rotate(-1deg);
+  }
+
+  59% {
+    transform:rotate(0deg);
+  }
+
+
+  100%{
+    transform:rotate(0deg);
+  }
 }
