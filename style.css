@@ -20,8 +20,8 @@ body {
 
 body {
   color: #111;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
   line-height: 147%;
 }
 
@@ -29,8 +29,7 @@ body {
 
 .container {  
   width: 100%;
-  height: 100%;
-  
+  height: 100%;  
 }
 
 .section {
@@ -52,32 +51,34 @@ body {
 }
 
 .splash {
-  width: 1000px;
-  height: 1000px;
-  background-image: url("images/Claw.png");
-  margin: 80px auto;
-  background-size: contain;
+  width: 100%;
+  height: 100vh;
+  background-image: url("images/port.jpg");  
+  background-size: cover;
   background-repeat: no-repeat;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  
+  align-items: center;  
 }
 
-.splash button, .game-over button {
-  width: 20%;
+.splash button, .game-over button, .you-win button {
+  width: 10%;
   height: 5%;
   font-size: 20px;
   text-transform: uppercase;
   background-color:  white;
-  border: none;  
-  font-family: 'Paytone One', sans-serif;
-  font-weight: 300;
-  border-radius: 10%;
+  border: none;    
+  font-weight: 600;
+  border-radius: 85px 85px 85px 85px;
+  letter-spacing: 3px;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .splash button:hover, .game-over button:hover{
-  background-color: #C57216;
+  background-color: #007EE3;
+  color: white;
   cursor: pointer;
 }
 
@@ -91,16 +92,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  
+  align-items: center;  
 }
 
 .game-over button {  
   background: white;
   color: black;  
-  width: 10%;  
- 
-  
+  width: 10%;   
 }
 
 .game-over h1 {
@@ -109,6 +107,56 @@ body {
   font-size: 80px;
 }
 
+.info {
+  position: absolute;    
+  width:  100px;     
+}
 
+.info p {
+  color: white;
+  font-size: 15px;
+  border-radius: 0px 87px 87px 0px;
+  margin-bottom: 5px; 
+  background: #007EE3;
+  padding-left: 5px;
+}
 
+.instructions {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  justify-items: center;
+  background-color: #ffffff;
+  opacity: 0.95;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 24px 24px 24px 24px;
+}
 
+.instructions h1 {
+  text-align: center;  
+}
+
+.game-screen audio {
+ display: none;
+}
+
+.you-win {
+  background-image: url("images/win.jpg");
+  background-position: center;
+  background-repeat: no-repeat;  
+  background-image: linear-gradient(to left top, #12202d, #203a4f, #2c5774, #37759b, #4195c4);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.you-win audio {
+  display: none;
+}
+
+.you-win button:hover {
+  cursor: pointer;
+}

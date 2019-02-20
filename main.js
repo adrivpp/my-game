@@ -10,8 +10,19 @@ const main = () => {                                  //construir el HTML del ma
   const buildSplash = ()=> {                    //start
     buildDom(`
       <section class="splash">        
+        <section class="instructions">
+          <h1>Instucciones</h1>
+          <p>Usa las flechas para moverte y saltar</p>
+          <p>Usa el espacio para disparar</p>
+          <p>Logra derrotar a tres enemigos y obtendrás una de las gemas,
+          si consigues tres habrás ganado el amuleto</p>
+        </section>
         <button class="start">Start</button>
+        <audio controls autoplay loop>
+          <source src= "./Audio/splash.mp3" type="audio/mpeg">
+        <audio>
       </section>
+      
     `);
     const button = document.querySelector('button');
     button.addEventListener('click', buildGame);    
@@ -20,11 +31,16 @@ const main = () => {                                  //construir el HTML del ma
   
   const buildGame = () => {                   //construye la pantalla de juego
     buildDom(`  
-      <section class="game-screen">    
-        <canvas class="canvas">                
-        </canvas>      
-        <p>Vidas</p>
-        <p>Gemas</p>         
+      <section class="game-screen">  
+      <div class="info">
+        <p class="vidas"></p>
+        <p class="gemas"></p>   
+      </div>
+        <canvas class="canvas">       
+        </canvas>   
+        <audio controls autoplay loop>
+          <source src= "./Audio/game.mp3" type="audio/mpeg">
+        <audio>              
       </section>
     `);
     
@@ -57,6 +73,7 @@ const main = () => {                                  //construir el HTML del ma
       } else if (event.keyCode === 37 && event.type === "keydown") {
           game.player.left = true;
           game.player.xS = -5;
+          game.player.friction = 0.5;
       } else if (event.type === 'keyup') {
           game.player.right = false;       
           game.player.isShoot = false;  
@@ -79,7 +96,8 @@ const main = () => {                                  //construir el HTML del ma
     
    };                  
 
-  buildSplash();  
+  buildSplash();
+    
 
   const buildGameOver = () => {             //construye la pantalla del game over
     buildDom(`
@@ -94,9 +112,11 @@ const main = () => {                                  //construir el HTML del ma
 
   const buildWin = ()=> {                 //pantalla de ganar
     const buildWinScreen = buildDom(`
-    <section class="you-win">
-        <h1>Has conseguido el amuleto de las nueve vidas</h1>
+    <section class="you-win">        
         <button class="restart">Restart</button>
+        <audio controls autoplay loop>
+          <source src= "./Audio/Captain Claw - The Ceremony.mp3" type="audio/mpeg">
+        <audio>
       </section>    
     `);
     const button = document.querySelector('button');

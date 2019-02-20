@@ -18,15 +18,13 @@ class Enemy {
     
   }
 
-  upDate() {
-    //this.currentFrame = ++this.currentFrame % 3;
+  upDate() {    
     this.srcX = this.currentFrame*this.width;
     this.srcY = 130;
     this.x = this.x + this.speed;    
   }
 
-  draw() {
-    //this.upDate();
+  draw() {    
     this.ctx.drawImage(this.img,this.srcX,this.srcY,this.width,this.height,this.x,this.y,this.width,this.height);
   }
 }

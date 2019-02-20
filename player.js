@@ -22,7 +22,7 @@ class Player {
     this.xS = 0;
     this.friction = -0.5;
     this.right = false;     
-    this.gems = [];
+    this.gems = 0;
     this.left = false;
     
   }
@@ -32,11 +32,17 @@ class Player {
       this.character = jumpSprite;
       this.srcX = 0;
     } else if (this.isShoot) {
-      this.character = shootSprite;  
-      this.srcX = 110;             
+        this.character = shootSprite;  
+        this.srcX = 110;             
+    } else if (this.left) {
+        this.character = leftSprite;
+    } else if (this.right) {
+        this.character = runSprite;   
     } else {
-      this.character = runSprite;
-    }; 
+        this.character = quietSprite;
+        this.srcX = 0;
+    };
+    
     
     this.srcY = 0;
   }
@@ -76,7 +82,7 @@ class Player {
 
   draw() {        
     this.upDate();    
-    if (this.cont > 6 && this.character === runSprite && this.right) {
+    if (this.cont > 6  && (this.right || this.left) && (this.character === runSprite ||this.character === leftSprite)) {
       this.currentFrame += this.width;      
       this.srcX = this.currentFrame;
       this.cont = 0;

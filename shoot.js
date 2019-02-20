@@ -5,16 +5,15 @@ class Shoot {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.x = x;
-    this.y = y;
-    this.speed = 1;        
-    this.xS = 8;
+    this.y = y;       
+    this.xS = 10;
     this.width = 10;
-    this.height = 10;
+    this.height = 8;
     
   }
 
   upDate() {         
-  this.x = this.x + this.xS*this.speed;      
+  this.x = this.x + this.xS;      
   }
 
   draw() {

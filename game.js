@@ -18,21 +18,22 @@ class Game {
     this.isWin = false;
   };
 
-  startLoop() {     
+  startLoop() {         
     this.movingPlatforms.push(new MovingPlats(this.canvas));
     this.player = new Player(this.canvas, 7);        
     const loop =() => {      
+      let lives = document.querySelector('.vidas');
+      lives.innerHTML = `Vidas: ${this.player.lives}`;
+      let gems = document.querySelector(".gemas");
+        gems.innerHTML = `Gemas: ${this.player.gems}`
+      
       if (Math.random() < 0.01) {        
         this.obstacles.push(new Obstacle(this.canvas));                         
       };                             
       if (this.kills === 3 && this.gems.length === 0) {
         this.gems.push(new Gems(this.canvas));         
         this.kills = 0;
-      }       
-        //this.enemies.forEach((enemy) =>{
-          //enemy.speed -=1;            
-         // console.log(enemy.speed)
-        //})               
+      }                      
       
       
       this.updateCanvas();
@@ -156,11 +157,7 @@ class Game {
       }
     })
     
-    this.shoots.forEach((shoot, index) => {         //disparos
-       //if (shoot.x > this.player.x + this.player.width + 150)     {
-        //this.player.isShoot = false;
-        
-       //} 
+    this.shoots.forEach((shoot, index) => {         //disparos       
        if (shoot.x > this.canvas.width) {
          this.shoots.splice(index,1);
        }                                                                                             
@@ -170,8 +167,7 @@ class Game {
              this.shoots.splice(index, 1);
              this.shootCont += 1;
              if (this.shootCont === 5) {
-               this.kills++;
-               console.log(this.kills);                  
+               this.kills++;                         
                this.enemies.splice(index, 1) 
                this.shootCont = 0;
              }
@@ -182,10 +178,12 @@ class Game {
 
     this.gems.forEach((gem, index) =>  {            //gemas
       if (this.player.checkPlatform(gem)) {
-        this.player.gems.push(1);
-        this.gems.splice(index,1);        
+        this.player.gems++;
+        this.gems.splice(index,1);    
+        this.player.lives++;
+        console.log(this.player.lives)    
       }
-      if (this.player.gems.length === 5) {
+      if (this.player.gems === 1) {
         this.isWin =  true;
         this.winGame();
       }
