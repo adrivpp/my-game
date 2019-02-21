@@ -20,7 +20,8 @@ class Game {
     this.hitSound.src = './audio/hit.mp3';
     this.playerSpeaks = new Audio();
     this.playerSpeaks.src = './audio/takethat.mp3';
-
+    this.gemSound = new Audio();
+    this.gemSound.src = './audio/gemas.mp3';
   };
 
   startLoop() {         
@@ -187,15 +188,14 @@ class Game {
     })
 
     this.gems.forEach((gem, index) =>  {       //gemas                
-      if (this.player.checkPlatform(gem)) {    
-        this.player.sound = new Audio("./audio/gemas.mp3");
-        this.player.sound.play();
+      if (this.player.checkPlatform(gem)) {            
+        this.gemSound.play();
         this.player.gems++;
         this.gems.splice(index,1);    
         this.player.lives++;
         console.log(this.player.lives)    
       }
-      if (this.player.gems === 2) {
+      if (this.player.gems === 1) {
         this.isWin =  true;
         this.winGame();
       }

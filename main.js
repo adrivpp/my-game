@@ -15,11 +15,11 @@ const main = () => {                                  //construir el HTML del ma
           <p>Usa las flechas para moverte y saltar</p>
           <p>Usa el espacio para disparar</p>
           <p>Logra derrotar a tres enemigos y obtendrás una de las gemas,
-          si consigues tres habrás ganado el amuleto</p>
+          si consigues cinco, habrás ganado el amuleto</p>
         </section>
         <button class="start">Start</button>
         <audio controls autoplay loop>
-          <source src= "./Audio/splash.mp3" type="audio/mpeg">
+          <source src= "./audio/splash.mp3" type="audio/mpeg">
         <audio>
       </section>
       
@@ -39,7 +39,7 @@ const main = () => {                                  //construir el HTML del ma
         <canvas class="canvas">       
         </canvas>   
         <audio controls autoplay loop>
-          <source src= "./Audio/game.mp3" type="audio/mpeg">
+          <source src= "./audio/game.mp3" type="audio/mpeg">
         <audio>              
       </section>
     `);
@@ -105,7 +105,7 @@ const main = () => {                                  //construir el HTML del ma
       <h1>Game Over</h1>
       <button class="restart">Restart</button>  
       <audio controls autoplay>
-          <source src= "./Audio/gameover.mp3">
+          <source src= "./audio/gameover.mp3">
         <audio>      
       </section>
     `);
@@ -119,7 +119,7 @@ const main = () => {                                  //construir el HTML del ma
         <img src="images/win (1).png">
         <button class="restart">Restart</button>
         <audio controls autoplay>
-          <source src= "./Audio/Captain Claw - The Ceremony (mp3cut.net).mp3">
+          <source src= "./audio/Captain Claw - The Ceremony (mp3cut.net).mp3">
         <audio>
       </section>    
     `);
