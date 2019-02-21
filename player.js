@@ -25,7 +25,7 @@ class Player {
     this.gems = 0;
     this.left = false;
     this.sound = new Audio();
-    this.sound.src = './audio/shoot.mp3';
+    this.sound.src = './audio/gun.mp3';
   }
 
   checkSprites() {
@@ -35,7 +35,7 @@ class Player {
     } else if (this.isShoot) {
         this.sound.currentTime = 0;
         this.sound.play();
-        this.sound.volume = 0.5;
+        //this.sound.volume = 0.5;
         this.character = shootSprite;  
         this.srcX = 110;             
     } else if (this.left) {

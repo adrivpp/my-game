@@ -19,8 +19,8 @@ const main = () => {                                  //construir el HTML del ma
         </section>
         <button class="start">Start</button>
         <audio controls autoplay loop>
-          <source src= "./audio/splash.mp3" type="audio/mpeg">
-        <audio>
+          <source src= "audio/splash.mp3" type="audio/mpeg">
+        </audio>
       </section>
       
     `);
@@ -39,8 +39,8 @@ const main = () => {                                  //construir el HTML del ma
         <canvas class="canvas">       
         </canvas>   
         <audio controls autoplay loop>
-          <source src= "./audio/game.mp3" type="audio/mpeg">
-        <audio>              
+          <source src= "audio/game.mp3" type="audio/mpeg">
+        </audio>              
       </section>
     `);
     
@@ -105,8 +105,8 @@ const main = () => {                                  //construir el HTML del ma
       <h1>Game Over</h1>
       <button class="restart">Restart</button>  
       <audio controls autoplay>
-          <source src= "./audio/gameover.mp3">
-        <audio>      
+          <source src= "audio/gameover.mp3">
+        </audio>      
       </section>
     `);
     const restart = document.querySelector('button');
@@ -119,8 +119,8 @@ const main = () => {                                  //construir el HTML del ma
         <img src="images/win (1).png">
         <button class="restart">Restart</button>
         <audio controls autoplay>
-          <source src= "./audio/Captain Claw - The Ceremony (mp3cut.net).mp3">
-        <audio>
+          <source src= "audio/Captain Claw - The Ceremony (mp3cut.net).mp3">
+        </audio>
       </section>    
     `);
     const button = document.querySelector('button');
