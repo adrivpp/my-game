@@ -25,7 +25,7 @@ class Player {
     this.gems = 0;
     this.left = false;
     this.sound = new Audio();
-    this.sound.src = './audio/shoot.mp3';
+    this.sound.src = './audio/gemas.mp3';
   }
 
   checkSprites() {
