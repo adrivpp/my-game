@@ -16,6 +16,11 @@ class Game {
     this.kills = 0;    
     this.movingPlatforms = [];
     this.isWin = false;
+    this.hitSound = new Audio();
+    this.hitSound.src = './audio/hit.mp3';
+    this.playerSpeaks = new Audio();
+    this.playerSpeaks.src = './audio/takethat.mp3';
+
   };
 
   startLoop() {         
@@ -107,8 +112,7 @@ class Game {
   checkCollisiion() {
     this.obstacles.forEach((obstacle, index) =>{       //obstaculos
       if (this.player.checkCollisions(obstacle)) {
-        this.player.sound = new Audio("./audio/hit.mp3");
-        this.player.sound.play();
+        this.hitSound.play();
         this.player.loseLives();      
         this.obstacles.splice(index, 1); 
         if (this.player.lives === 0) {
@@ -121,8 +125,7 @@ class Game {
     })
     this.enemies.forEach((obstacle, index) =>{          //enemigos
       if (this.player.checkCollisions(obstacle)) { 
-        this.player.sound = new Audio("./audio/hit.mp3");
-        this.player.sound.play();       
+        this.hitSound.play();       
         this.player.loseLives(); 
         if (this.player.lives === 0) {
           this.isGameOver = true;
@@ -173,8 +176,7 @@ class Game {
              this.shoots.splice(index, 1);
              this.shootCont += 1;
              if (this.shootCont === 5) {
-               this.player.sound = new Audio("./audio/takethat.mp3")
-               this.player.sound.play();
+               this.playerSpeaks.play();
                this.kills++;                         
                this.enemies.splice(index, 1) 
                this.shootCont = 0;
