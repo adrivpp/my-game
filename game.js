@@ -169,6 +169,7 @@ class Game {
        if (this.enemies.length > 0) {
          this.enemies.forEach((enemy, index) =>{
            if (shoot.checkCollision(enemy)) {
+             
              this.shoots.splice(index, 1);
              this.shootCont += 1;
              if (this.shootCont === 5) {
