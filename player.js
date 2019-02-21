@@ -32,7 +32,7 @@ class Player {
       this.character = jumpSprite;
       this.srcX = 0;
     } else if (this.isShoot) {
-        this.sound = new Audio("audio/shoot.mp3");
+        this.sound = new Audio("./audio/shoot.mp3");
         this.sound.play();
         this.sound.volume = 0.2;
         this.character = shootSprite;  
