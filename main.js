@@ -60,26 +60,24 @@ const main = () => {                                  //construir el HTML del ma
     game.startLoop();     
     const setMoves = (event) => {     
 
-      if  (event.keyCode === 38 && !(game.player.jump) || event.keyCode === 38 && game.player.isCollide) { //salto
-        game.player.speed = -15;
-        game.player.jump = true;               
-        
-      } else if (event.keyCode === 0 || event.keyCode === 32 && event.type === "keydown" && game.player.cont > 10) {        
-         game.shoots.push(new Shoot(canvas, game.player.x + game.player.width - 10, game.player.y + game.player.height/2 - 25))       
-         game.player.isShoot = true;          
-      } else if (event.keyCode === 39 && event.type === "keydown") {
+      if (event.type === "keydown") {
+        if (event.keyCode === 38){          
+          game.player.jump = true;
+        } else if (event.keyCode === 0 || event.keyCode === 32) {                      
+          game.player.isShoot = true;   
+          game.shoots.push(new Shoot(canvas, game.player.x + game.player.width - 10, game.player.y + game.player.height/2 - 25))        
+        } else if  (event.keyCode === 39) {
           game.player.right = true;
-          game.player.xS = 5;
-      } else if (event.keyCode === 37 && event.type === "keydown") {
+        } else if (event.keyCode === 37 && event.type === "keydown") {
           game.player.left = true;
-          game.player.xS = -5;
-          game.player.friction = 0.5;
-      } else if (event.type === 'keyup') {
-          game.player.right = false;       
-          game.player.isShoot = false;  
-          game.player.left = false; 
-      } 
-      
+        }
+    } else if (event.type === "keyup") {
+        game.player.right = false;       
+        game.player.isShoot = false;  
+        game.player.left = false; 
+        game.player.jump = false;
+    }     
+
     };   
     
 

@@ -12,7 +12,7 @@ class Player {
     this.lives = lives;
     this.speed = 0;
     this.isCollide = false;        
-    this.character = runSprite;
+    this.character;
     this.srcX = 0;
     this.srcY;
     this.currentFrame = 0;           
@@ -29,19 +29,21 @@ class Player {
   }
 
   checkSprites() {
-    if (this.jump) {
-      this.character = jumpSprite;
+    if (this.jump) {      
+      this.character = jumpSprite;      
       this.srcX = 0;
     } else if (this.isShoot) {
         this.sound.currentTime = 0;
-        this.sound.play();
-        //this.sound.volume = 0.5;
+        this.sound.play();        
         this.character = shootSprite;  
         this.srcX = 110;             
     } else if (this.left) {
         this.character = leftSprite;
+        this.xS = -5;
+        this.friction = 0.5;
     } else if (this.right) {
-        this.character = runSprite;   
+        this.character = runSprite; 
+        this.xS = 5;  
     } else {
         this.character = quietSprite;
         this.srcX = 0;
@@ -52,14 +54,18 @@ class Player {
   }
 
   checkMovement() {
+    if (this.jump && this.isCollide || this.jump && this.y + this.height === this.canvas.height) {
+      this.speed = -15;
+    } else {
+        this.speed += 0.5;
+    }
+
     if (this.isCollide && !this.jump) {
       this.speed = 0;
       this.y = this.platformY - this.height + 5;
     }
         
-    if(this.jump && this.y < this.canvas.height - this.height/2 || this.y < this.canvas.height - this.height && !this.isCollide ) {      
-      this.speed += 0.5;      
-    }              
+                
     this.y = this.y + this.speed;    
     
     if (this.y >= this.canvas.height - this.height) {

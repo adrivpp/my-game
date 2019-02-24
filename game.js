@@ -32,25 +32,25 @@ class Game {
       let lives = document.querySelector('.vidas');
       lives.innerHTML = `Vidas: ${this.player.lives}`;
       let gems = document.querySelector(".gemas");
-        gems.innerHTML = `Gemas: ${this.player.gems}`
+        gems.innerHTML = `Gemas: ${this.player.gems}`;    
       
+
       if (Math.random() < 0.01) {        
         this.obstacles.push(new Obstacle(this.canvas));                         
       };                             
-      if (this.kills === 3 && this.gems.length === 0) {
+      if (this.kills === 3 && this.gems.length === 0) {          
         this.gems.push(new Gems(this.canvas));         
         this.kills = 0;
-      }                      
+      }                   
       
       
       this.updateCanvas();
       this.clearCanvas();
       this.drawCanvas();
-      this.checkCollisiion();           
+      this.checkCollisiion();  
+      this.checkplayerLives();         
       window.requestAnimationFrame(loop);
-      if (this.shoots.isShoot) {
-        this.shoots.push(new Shoot(this.canvas, this.player.x, this.player.y));
-      }
+    
 
     };
       
@@ -110,28 +110,28 @@ class Game {
 
   }
 
+  checkplayerLives() {
+    if (this.player.lives === 0) {
+      this.isGameOver = true;
+      this.onGameOver();
+    }
+  }
+
   checkCollisiion() {
     this.obstacles.forEach((obstacle, index) =>{       //obstaculos
       if (this.player.checkCollisions(obstacle)) {
         this.hitSound.play();
         this.player.loseLives();      
-        this.obstacles.splice(index, 1); 
-        if (this.player.lives === 0) {
-          this.isGameOver = true;
-          this.onGameOver();
-        }
+        this.obstacles.splice(index, 1);         
       } else if (obstacle.x < 0) {
           this.obstacles.splice(index, 1);          
       } 
-    })
+    });
+
     this.enemies.forEach((obstacle, index) =>{          //enemigos
       if (this.player.checkCollisions(obstacle)) { 
         this.hitSound.play();       
-        this.player.loseLives(); 
-        if (this.player.lives === 0) {
-          this.isGameOver = true;
-          this.onGameOver();
-        }       
+        this.player.loseLives();         
         this.enemies.splice(index, 1); 
       } else if (obstacle.x < 0){
         this.enemies.splice(index, 1);              
@@ -195,7 +195,7 @@ class Game {
         this.player.lives++;
         console.log(this.player.lives)    
       }
-      if (this.player.gems === 1) {
+      if (this.player.gems === 5) {
         this.isWin =  true;
         this.winGame();
       }

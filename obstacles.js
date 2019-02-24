@@ -22,7 +22,7 @@ class Obstacle {
 
   draw() {
   this.ctx.drawImage(this.img,this.currentFrame*this.width,220,this.width,this.height,this.x,this.y,this.width,this.height)
-  //this.ctx.fillRect(this.x, this.y - this.height/2, this.width, this.height)
+  
   }
 
 }
